@@ -18,20 +18,8 @@ console.log('✅ Environment variables loaded');
 
 const app = express();
 
-// CORS Configuration - UPDATED with correct Vercel URLs
-app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    'http://localhost:3000',
-    'http://localhost:5174',
-    'https://electronics-shop-roan.vercel.app', // FIXED: Changed from electronics-hub
-    'https://electronics-shop-git-main-shrutikas-projects-271002c5.vercel.app', // Vercel preview URLs
-    'https://*.vercel.app' // Allow all Vercel domains
-  ],
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+// CORS Configuration - Allow all origins (simplified for now)
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -56,5 +44,5 @@ app.get('/', (req, res) => {
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`📡 CORS enabled for Vercel domains`);
+  console.log(`📡 CORS enabled for all origins`);
 });
