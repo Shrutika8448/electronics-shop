@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
 import { CheckCircle } from 'lucide-react';
+import API_URL from '../../config/api';
 
 const Checkout = () => {
   const { cartItems, getCartTotal, clearCart } = useContext(CartContext);

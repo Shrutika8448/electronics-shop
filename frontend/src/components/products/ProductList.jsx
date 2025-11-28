@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import ProductCard from './ProductCard';
 import { Loader2, Search, X } from 'lucide-react';
+import API_URL from '../../config/api';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -21,7 +22,8 @@ const ProductList = () => {
       if (searchQuery) params.append('search', searchQuery);
       if (sortOption) params.append('sort', sortOption);
       
-      const url = `http://localhost:5000/api/products?${params.toString()}`;
+      // USE API_URL instead of hardcoded localhost
+      const url = `${API_URL}/api/products?${params.toString()}`;
       const response = await fetch(url);
       if (!response.ok) throw new Error('Failed to fetch products');
       const data = await response.json();
@@ -56,7 +58,7 @@ const ProductList = () => {
       <div className="mb-6 flex flex-col md:flex-row gap-4">
         {/* Search Input */}
         <div className="flex-1 relative">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-offwhite-400" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
           <input
             type="text"
             placeholder="Search products..."
@@ -67,7 +69,7 @@ const ProductList = () => {
           {searchQuery && (
             <button
               onClick={clearSearch}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-offwhite-400 hover:text-offwhite-600 transition"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition"
             >
               <X className="w-5 h-5" />
             </button>
@@ -95,7 +97,7 @@ const ProductList = () => {
             className={`px-5 py-2.5 rounded-xl font-semibold transition-all duration-200 whitespace-nowrap shadow-sm ${
               !selectedCategory
                 ? 'bg-primary-700 text-white hover:bg-primary-800 shadow-md scale-105'
-                : 'bg-offwhite-50 text-offwhite-700 hover:bg-offwhite-100 border border-offwhite-300 hover:border-primary-300'
+                : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-300 hover:border-primary-300'
             }`}
           >
             All
@@ -107,7 +109,7 @@ const ProductList = () => {
               className={`px-5 py-2.5 rounded-xl font-semibold transition-all duration-200 whitespace-nowrap shadow-sm ${
                 selectedCategory === cat
                   ? 'bg-primary-700 text-white hover:bg-primary-800 shadow-md scale-105'
-                  : 'bg-offwhite-50 text-offwhite-700 hover:bg-offwhite-100 border border-offwhite-300 hover:border-primary-300'
+                  : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-300 hover:border-primary-300'
               }`}
             >
               {cat}
@@ -118,7 +120,7 @@ const ProductList = () => {
 
       {/* Results Count */}
       {!loading && (
-        <p className="text-offwhite-600 mb-6">
+        <p className="text-gray-600 mb-6">
           {products.length} {products.length === 1 ? 'product' : 'products'} found
         </p>
       )}
@@ -132,15 +134,15 @@ const ProductList = () => {
         </div>
       ) : products.length === 0 ? (
         <div className="text-center py-20">
-          <p className="text-xl text-offwhite-600 mb-4">
+          <p className="text-xl text-gray-600 mb-4">
             {searchQuery || selectedCategory 
               ? 'No products found' 
               : 'Unable to connect to server'}
           </p>
-          <p className="text-offwhite-500">
+          <p className="text-gray-500">
             {searchQuery || selectedCategory 
               ? 'Try adjusting your search or filters' 
-              : 'Please make sure the backend server is running on port 5000'}
+              : 'Please make sure the backend server is running'}
           </p>
         </div>
       ) : (
