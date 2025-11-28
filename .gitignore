@@ -1,0 +1,20 @@
+# .gitignore
+node_modules/
+.env
+.DS_Store
+dist/
+build/
+*.log
+.vscode/
+.idea/
+
+# Backend specific
+backend/node_modules/
+backend/.env
+backend/dist/
+
+# Frontend specific
+frontend/node_modules/
+frontend/.env
+frontend/dist/
+frontend/build/
