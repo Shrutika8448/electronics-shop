@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Smartphone, Truck, Shield, ArrowRight } from 'lucide-react';
+import { Smartphone, Truck, Shield, ArrowRight, Loader2 } from 'lucide-react';
 import Slideshow from '../components/common/Slideshow';
 import ProductCard from '../components/products/ProductCard';
-import { Loader2 } from 'lucide-react';
-import API_URL from '../../config/api';
+import API_URL from '../config/api'; // FIXED PATH (one level up from pages)
 
 const Home = () => {
   const navigate = useNavigate();
@@ -17,16 +16,15 @@ const Home = () => {
 
   const fetchFeaturedProducts = async () => {
     try {
-      const response = await fetch(`${API_URL}/api/products/${id}`);
+      // Get all products, then take first 4
+      const response = await fetch(`${API_URL}/api/products`);
       if (!response.ok) throw new Error('Failed to fetch products');
       const data = await response.json();
-      // Get first 4 products
       setFeaturedProducts(data.slice(0, 4));
       setLoading(false);
     } catch (error) {
       console.error('Error fetching products:', error);
       setLoading(false);
-      // Set empty array on error so UI doesn't break
       setFeaturedProducts([]);
     }
   };
@@ -93,7 +91,9 @@ const Home = () => {
         ) : featuredProducts.length === 0 ? (
           <div className="text-center py-20">
             <p className="text-xl text-offwhite-600 mb-4">Unable to load products</p>
-            <p className="text-offwhite-500">Please make sure the backend server is running on port 5000</p>
+            <p className="text-offwhite-500">
+              Please try again later.
+            </p>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
