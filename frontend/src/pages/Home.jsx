@@ -4,6 +4,7 @@ import { Smartphone, Truck, Shield, ArrowRight } from 'lucide-react';
 import Slideshow from '../components/common/Slideshow';
 import ProductCard from '../components/products/ProductCard';
 import { Loader2 } from 'lucide-react';
+import API_URL from '../../config/api';
 
 const Home = () => {
   const navigate = useNavigate();
