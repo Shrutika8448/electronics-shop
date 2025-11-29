@@ -70,7 +70,7 @@ const RegisterPage = () => {
                 required
                 autoComplete="name"
                 className="input-field pl-12"
-                placeholder="John Doe"
+                placeholder="Name"
               />
             </div>
           </div>
