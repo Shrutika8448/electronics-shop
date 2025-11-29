@@ -2,6 +2,8 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../../context/CartContext';
 import { ShoppingCart } from 'lucide-react';
+import API_URL from '../../config/api';
+
 
 const ProductCard = ({ product }) => {
   const { addToCart } = useContext(CartContext);
